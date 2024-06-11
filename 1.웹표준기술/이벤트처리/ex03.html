@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+      <style>
+        .box {
+          padding: 100px;
+        }
+        .box1 {
+          background: gray;
+        }
+        .box2 {
+          background: green;
+        }
+        .box3 {
+          background: orange;
+        }
+      </style>
+      <script>
+        window.addEventListener("DOMContentLoaded", function() {
+          const box1 = document.querySelector(".box1");
+          const box2 = document.querySelector(".box2");
+          const box3 = document.querySelector(".box3");
+
+          box1.addEventListener("click", function () {
+            console.log("BOX1");
+          });
+          box2.addEventListener("click", function() {
+            console.log("BOX2");
+          });
+          box3.addEventListener("click", function(e) {
+            //console.log(e);
+            e.stopPropagation() //이벤트전파취소
+            console.log("BOX3");
+          });
+        });
+      </script>
+      <div class="box box1">
+        BOX1
+        <div class="box box2">
+          BOX2
+          <div class="box box3">
+            BOX3
+          </div>
+        </div>
+      </div>
+    </body>
+</html>

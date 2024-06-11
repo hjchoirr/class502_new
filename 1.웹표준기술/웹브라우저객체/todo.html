@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script src="js/todo3.js"></script>
+
+    </head>
+    <body>
+        <form name="frmRegist" autocomplete="off">
+            <input type="text" name="subject">
+            <button type="submit">등록</button>
+        </form>
+        <ul class="items">
+        </ul>
+        <script type="text/html" id="tpl">
+            <li data-id="#id">#subject
+                <button type="button">삭제</button>
+            </li>
+        </script>
+    </body>
+</html>

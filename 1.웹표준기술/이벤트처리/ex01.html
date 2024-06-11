@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <script>
+            /*
+            window.onload = function () {
+                const buttonE1 = document.getElementById("button");
+                buttonE1.onclick = function() {
+                    alert("클릭!");
+                };
+            }
+            */
+            window.addEventListener("DOMContentLoaded", function() {
+                const buttonE1 = document.getElementById("button");
+                buttonE1.onclick = function() {
+                    alert("클릭!");
+                };
+                buttonE1.onclick = function() {
+                    alert("클릭2!");
+                }
+            });
+            
+        </script>
+        <button type="button" id="button">클릭</button>
+    </body>
+</html>

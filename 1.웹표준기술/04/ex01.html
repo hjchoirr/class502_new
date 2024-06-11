@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>
+        <h1 style="color:orange;">회원가입</h1>
+        <form name="frm1" method="post" action="ex02.html" autocomplete="on">
+            <input type="hidden" name="mode" value="join">
+            <fieldset>
+                <legend>회원정보</legend>
+                <dl>
+                    <dt>아이디</dt>
+                    <dd>
+                        <input type="text" name="userId" autofocus required placeholder="아이디"> 
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>비밀번호</dt>
+                    <dd>
+                        <input type="password" name="userPw" minlength="9" required>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>비밀번호확인</dt>
+                    <dd>
+                        <input type="password" name="confirmPw">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>회원명</dt>
+                    <dd>
+                        <input type="text" name="userNm" required>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>email</dt>
+                    <dd>
+                        <input type="email" name="email">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>생년월일</dt>
+                    <dd>
+                        <input type="date" name="birth">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>지역</dt>
+                    <dd>
+                        <datalist id="locationlist">
+                            <option value="서울특별시"></option>
+                            <option value="인천광역시"></option>
+                            <option value="경기도"></option>
+                        </datalist>
+                        <input type="text" name="location" list="locationlist">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>자기소개</dt>
+                    <dd>
+                        <textarea name="introduction" cols="30" rows="10"></textarea>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>프로필이미지</dt>
+                    <dd>
+                        <input type="file" name="profile" multiple>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>datetime</dt>
+                    <dd>
+                        <time datetime="YYYYMMDD-hh:mm:ss" name="datetime">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>취미</dt>
+                    <dd>
+                        <label><input type="checkbox" name="hobby" value="취미1">취미1</label>
+                        <label><input type="checkbox" name="hobby" value="취미2">취미2</label>
+                        <label><input type="checkbox" name="hobby" value="취미3" checked>취미3</label>
+                    </dd>
+                </dl>
+            </fieldset>
+            <fieldset>
+                <legend>학교정보</legend>
+                <dl>
+                    <dt>전공</dt>
+                    <dd>
+                        <select name="major">
+                            <optgroup label="공과대학">
+                                <option value="컴퓨터공학">컴퓨터공학</option>
+                                <option value="수학과">수학과</option>
+                            </optgroup>
+                            <optgroup label="기타학과">
+                                <option value="영어영문과">영어영문과</option>
+                                <option value="음악과">음악과</option>
+                            </optgroup>
+                        </select>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>학년</dt>
+                    <dd>
+                        
+                        <input type="radio" name="grade" value="1" id="grade1"><label for="grade1">1학년</label>
+                        <input type="radio" name="grade" value="2" id="grade2"><label for="grade2">2학년</label>
+                        <input type="radio" name="grade" value="3" id="grade3"><label for="grade3">3학년</label>
+                    </dd>
+                </dl>
+            </fieldset>
+            <!--
+            <input type="reset" value="다시입력">
+            <input type="submit" value="가입하기">
+            -->
+            <button type="reset">다시입력</button>
+            <button type="submit">가입하기</button>
+            <progress max="100" value="70"></progress>
+            <meter max="100" value="70"></meter>
+        </form>
+    </body>
+</html>

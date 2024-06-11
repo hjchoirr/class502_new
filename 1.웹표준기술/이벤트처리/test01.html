@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+      
+      <script>
+        /*
+        window.addEventListener("DOMContentLoaded", function() {
+          const buttonEl = document.getElementById("button1");
+          buttonEl.onclick = function () {
+            alert("클릭됨!!");
+          };
+        });
+        */
+        window.addEventListener("DOMContentLoaded", function() {
+          const buttonEl = document.getElementById("button1");
+          buttonEl.addEventListener("click", function() {
+            alert("클릭됨1");
+          });
+
+          buttonEl.addEventListener("click", function() {
+            alert("클릭됨2");
+          });
+
+          const buttonEl2 = document.getElementById("button2");
+          buttonEl2.addEventListener("click", eventHandler);
+          function eventHandler() {
+              alert("버튼 2 클릭됨!!");
+          };
+        });
+
+
+     </script>
+      <button type="button" id="button1">버튼</button>
+      <button type="button" id="button2">버튼2</button>
+    </body>
+</html>

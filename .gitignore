@@ -1,0 +1,8 @@
+/docs
+.idea/
+*.iml
+/eclipse
+/dbeaver
+/apache-maven-*
+/gradle-*
+/apache-tomcat-*

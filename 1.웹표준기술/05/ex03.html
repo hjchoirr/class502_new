@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <style>
+
+            li {
+                background: orange;
+            }
+
+            ol li {
+                background: blue;
+            }
+
+            /*
+            ul li span {
+                color: red;
+            }
+            */
+            ul > li > span {
+              color: red;  
+            }
+        </style>
+        <ul>
+            <li class="menus">
+                <span>메뉴1</span>
+                <ol>
+                    <li>서브메뉴1</li>        
+                    <li>
+                        <span>서브메뉴2</span>
+                    </li>        
+                </ol>
+            </li>
+            <li>메뉴2</li>
+            <li>메뉴3</li>
+        </ul>
+
+        <ol>
+            <li>메뉴1</li>
+            <li>메뉴2</li>
+            <li>메뉴3</li>
+        </ol>
+
+    </body>
+</html>

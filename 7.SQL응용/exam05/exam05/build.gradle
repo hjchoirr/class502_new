@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.choongang'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = 17
+
+ext {  // 각 브레이스 안에서 모두 사용 가능한 전역변수 선언
+    lbversion = '1.18.32'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //def version:String = '1.18.32'
+
+    compileOnly "org.projectlombok:lombok:$lbversion"
+    annotationProcessor "org.projectlombok:lombok:$lbversion"
+    testCompileOnly "org.projectlombok:lombok:$lbversion"
+    testAnnotationProcessor "org.projectlombok:lombok:$lbversion"
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}

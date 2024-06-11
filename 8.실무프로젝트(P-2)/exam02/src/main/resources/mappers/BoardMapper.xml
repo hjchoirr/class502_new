@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.BoardMapper">
+    <select id="getList" resultType="board.Board">
+        SELECT * FROM Board
+    </select>
+    <select id="getList3" resultType="board.Board">
+        <bind name="P_subject" value="'%' + _parameter.getSubject() + '%'"/>
+        <bind name="P_content" value="'%' + _parameter.getContent() + '%'"/>
+        select * from board
+        <where>
+            <if test="seq != null">
+                seq = #{seq}
+            </if>
+            <if test="poster != null">
+                and poster like #{P_subject}
+            </if>
+            <if test="content != null">
+                and mobile like #{P_content}
+            </if>
+        </where>
+    </select>
+    <insert id="register">
+        insert into board (seq, poster, subject, content)
+        values (seq_board.nextval, #{poster}, #{subject}, #{content})
+    </insert>
+    <insert id="register2">
+        <selectKey keyProperty="seq" order="BEFORE" resultType="long">
+            select seq_board.nextval from dual
+        </selectKey>
+        insert into board (seq, poster, subject, content)
+        values (#{seq}, #{poster}, #{subject}, #{content})
+
+    </insert>
+
+    <update id="modify">
+        update board
+        <set>
+            <if test="poster != null">
+                poster = #{poster},
+            </if>
+            <if test="subject != null">
+                subject = #{subject},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+        </set>
+        where seq = #{seq}
+    </update>
+    <delete id="delete">
+        delete from board where seq = #{seq}
+    </delete>
+
+</mapper>

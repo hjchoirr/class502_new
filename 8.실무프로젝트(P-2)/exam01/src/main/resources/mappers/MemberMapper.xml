@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.MemberMapper">
+    <resultMap id="memberMap" type="exam01.Member">
+        <result column="user_no" property="userNo" />
+        <result column="user_id" property="userId" />
+        <result column="user_pw" property="userPw" />
+        <result column="user_nm" property="userNm" />
+        <result column="mobile" property="mobile" />
+        <result column="reg_dt" property="regDt" />
+    </resultMap>
+
+    <select id="getList" resultMap="memberMap">
+        SELECT * FROM MEMBER
+    </select>
+    <!--
+    <update>
+
+    </update>
+    <insert>
+
+    </insert>
+    <delete>
+
+    </delete>
+    -->
+</mapper>

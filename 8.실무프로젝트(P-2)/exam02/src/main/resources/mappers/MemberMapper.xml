@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.MemberMapper">
+    <resultMap id="memberMap" type="member.Member">
+        <result column="USER_NO" property="userNo" />
+        <result column="USER_ID" property="userId" />
+        <result column="USER_PW" property="userPw" />
+        <result column="USER_NM" property="userNm" />
+        <result column="MOBILE" property="mobile" />
+        <result column="REG_DT" property="regDt" />
+        <result column="MOD_DT" property="modDt" />
+    </resultMap>
+    <!--<select id="getList" resultType="member.Member">-->
+    <select id="getList" resultMap="memberMap">
+        SELECT * FROM MEMBER
+    </select>
+    <select id="getList3" resultMap="memberMap">
+        <bind name="P_userNm" value="'%' + _parameter.getUserNm() + '%'"/>
+        <bind name="P_mobile" value="'%' + _parameter.getMobile() + '%'"/>
+        SELECT * FROM MEMBER
+        <where>
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+            <if test="userNm != null">
+                and user_nm like #{P_userNm}
+            </if>
+            <if test="mobile != null">
+                and mobile like #{P_mobile}
+            </if>
+        </where>
+    </select>
+    <select id="getList4" resultMap="memberMap">
+        select * from member
+        <where>
+            <foreach item="item" index="index" collection="list"
+                open="USER_ID IN (" close=")" separator=",">
+                #{item}
+
+            </foreach>
+        </where>
+    </select>
+    <select id="getList5">
+        select * from member where
+        <![CDATA[
+            user_no > #{userNo}
+        ]]>
+    </select>
+    <insert id="register">
+        insert into member (user_no, user_id, user_pw, user_nm, mobile)
+        values (seq_member.nextval, #{userId}, #{userPw}, #{userNm}, #{mobile})
+    </insert>
+    <insert id="register2">
+        <selectKey keyProperty="userNo" order="BEFORE" resultType="long">
+            select seq_member.nextval from dual
+        </selectKey>
+        insert into member (user_no, user_id, user_pw, user_nm, mobile)
+                    values (#{userNo}, #{userId}, #{userPw}, #{userNm}, #{mobile})
+
+    </insert>
+
+    <update id="modify">
+        update member
+            <set>
+                <if test="userPw != null">
+                    user_pw = #{userPw},
+                </if>
+                <if test="userNm != null">
+                    user_nm = #{userNm},
+                </if>
+                <if test="mobile != null">
+                    mobile = #{mobile},
+                </if>
+            </set>
+        where user_id = #{userId}
+    </update>
+    <delete id="delete">
+        delete from member where user_id = #{userId}
+    </delete>
+
+</mapper>

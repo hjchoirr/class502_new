@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+      <script>
+        const person = {
+          name: "hjchoi",
+          age: 40,
+          showInfo() {
+            console.log(this);
+          },
+          handleEvent() {
+            console.log("handleEvent", this);
+          }
+        };
+        window.addEventListener("DOMContentLoaded", function() {
+
+          function handleClick() {
+            console.log(this);
+          }
+          handleClick = handleClick.bind(person);
+          const buttonE1 = document.getElementById("button");
+          //buttonE1.addEventListener("click", handleClick) ;
+
+          //다음 두개 같은 this
+          //buttonE1.addEventListener("click", person.showInfo);
+          /*
+          buttonE1.addEventListener("click", function() {
+            person.showInfo();
+          });
+          */
+          buttonE1.addEventListener("click", person); //person.handleEvent
+        });
+      </script>
+
+      <button type="button" id="button">클릭!</button>
+    </body>
+</html>
