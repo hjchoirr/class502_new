@@ -47,7 +47,7 @@ public class Ex02Test {
         loginservice.setMailer(mailer);
         loginservice.process(request);
         String email = request.getParameter("email");
-        then(mailer).should(only()).send(email); // send 함수가 loginService.process 메서드에서 하너번이상 호출되는지 체크
+        then(mailer).should(only()).send(email); // send 함수가 loginService.process 메서드에서 한번이상 호출되는지 체크
 
     }
 
