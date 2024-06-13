@@ -16,7 +16,15 @@
 	int result = add(num1, num2);
 	System.out.println(result);
 	
+	/* 주석2	*/
+	
 %>
+<br>
+<%-- JSP 주석 --%>
+
+<%=num1%>+<%=num2%>=<%=result%>
+
+<!-- HTML 주석 -->
 
 <%! // 선언문 : 인스턴스변수
 	int num1 = 10;
@@ -25,5 +33,19 @@
 	int add(int num1, int num2) {
 		return num1 + num2;
 	}
+	
+%>
+
+<%!int data = 50;%>
+<%
+	out.println("Value of the variable is:" + data);
+%>
+<%
+	int aa = 60;
+	out.println("aa=" + aa);
+	out.printf("aa=%d%n", aa);
+
+%>
+<%!
 	
 %>
