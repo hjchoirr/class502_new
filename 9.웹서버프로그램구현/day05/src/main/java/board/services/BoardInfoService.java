@@ -1,7 +1,5 @@
 package board.services;
-
 import board.entities.BoardData;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.IntStream;
