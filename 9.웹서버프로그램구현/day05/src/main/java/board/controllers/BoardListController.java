@@ -20,6 +20,11 @@ public class BoardListController extends HttpServlet {
         List<BoardData> items = service.getList();
 
         req.setAttribute("items", items);
+
+        //속성 설정은 RequestDispatcher 보다 위에 넣기
+        req.setAttribute("addCss", new String[] { "board/style", "board/list"});
+        req.setAttribute("addScript", List.of("board/common", "board/list"));
+
         RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/templates/board/list.jsp");
         rd.forward(req,resp);
     }
