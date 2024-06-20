@@ -28,7 +28,7 @@ public class JoinServiceTest {
     @BeforeEach
     void init() {
         service =  MemberServiceProvider.getInstance().joinService();
-        mapper = DBConn.getSession().getMapper(MemberMapper.class);
+        mapper = DBConn.getSession(false).getMapper(MemberMapper.class);
     }
     RequestJoin getData() {
         Faker faker = new Faker(Locale.ENGLISH);
@@ -50,6 +50,7 @@ public class JoinServiceTest {
            //JoinService service = new JoinService();
            service.process(form);
         });
+        System.out.println(form.getEmail());
         //가입된 이메일로 회원이 조회되는지 체크
         Member member = mapper.get(form.getEmail());
         assertEquals(form.getEmail(), member.getEmail());
@@ -143,7 +144,7 @@ public class JoinServiceTest {
 
         assertThrows(DuplicatedMemberException.class, () -> {
             RequestJoin form = getData();
-            provider.joinService().process(form);
+            provider.joinService().process(form); // mapper를 다시 생성하지 않으면 mybatis 가 이전 데이터를 캐싱하고 있다
             provider.joinService().process(form);
         });
     }
