@@ -3,6 +3,7 @@ package org.choongang.member.controllers;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,7 +29,20 @@ public class LoginController extends HttpServlet {
         try{
             LoginService service = MemberServiceProvider.getInstance().loginService();
             service.process(req);
-            go(req.getContextPath() + "/", "parent", resp);
+
+            //이메일 기억하기 처리
+            String email = req.getParameter("email");
+            Cookie cookie = new Cookie("saveEmail", email);
+
+            if(req.getParameter("saveEmail") != null) {
+                // 7일간 기억하기
+                cookie.setMaxAge(60 * 60 * 24 * 7);
+            } else { // 체크 해제 : 만료날짜를 과거로
+                cookie.setMaxAge(0);
+            }
+
+            resp.addCookie(cookie);
+            go(req.getContextPath() + "/", "parent", resp); //iframe에서 처리된거라서 부모프레임으로 돌아가기
 
         }catch(CommonException e) {
             alertError(e, resp);
