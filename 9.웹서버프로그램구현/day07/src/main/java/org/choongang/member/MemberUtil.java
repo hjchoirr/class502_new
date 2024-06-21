@@ -6,9 +6,9 @@ import org.choongang.member.entities.Member;
 
 public class MemberUtil {
     public static boolean isLogin(HttpServletRequest request) {
-        Member member = (Member) request.getSession().getAttribute("member");
-        return member != null;
-        //return getMember(request) != null;
+        //Member member = (Member) request.getSession().getAttribute("member");
+        //return member != null;
+        return getMember(request) != null; //위 두줄과 동일
     }
 
     public static Member getMember(HttpServletRequest request) {

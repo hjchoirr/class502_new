@@ -11,7 +11,6 @@ import org.choongang.member.services.JoinService;
 import org.choongang.member.services.MemberServiceProvider;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import static org.choongang.global.MessageUtil.alertError;
 import static org.choongang.global.MessageUtil.go;
