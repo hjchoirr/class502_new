@@ -28,6 +28,7 @@ public class LoginController extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try{
             LoginService service = MemberServiceProvider.getInstance().loginService();
+
             service.process(req);
 
             //이메일 기억하기 처리
