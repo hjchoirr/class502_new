@@ -7,7 +7,7 @@ public class Member {
     private String email;
     private LocalDateTime regDt;
 
-
+    public final String str = "ABC";
     public String getUserId() {
         return userId;
     }

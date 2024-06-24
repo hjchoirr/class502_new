@@ -9,32 +9,26 @@ public class Ex01 {
         Class clazz = Member.class;
 
         Constructor constructor = clazz.getDeclaredConstructors()[0];
-
         Object obj = constructor.newInstance();
 
         Method[] methods = clazz.getDeclaredMethods();
-        Class clz;
-        for(Method method : methods) {
+        for (Method method : methods) {
             String name = method.getName();
-            System.out.println(name);
-            if(!name.startsWith("set")) {
-                //continue;
-
-                clz = method.getParameterTypes()[0];
-                System.out.println(method.getParameterTypes()[0]);
-                Object arg = null;
-                if (clz == String.class) {
-                    System.out.println("1---");
-                    arg = "문자열";
-                } else if (clz == LocalDateTime.class) {
-                    System.out.println("1---");
-
-                    arg = LocalDateTime.now();
-
-                }
-                method.invoke(obj, arg);
+            if (!name.startsWith("set")) {
+                continue;
             }
+            System.out.println("method name : " + name);
+            Class clz = method.getParameterTypes()[0];
+            Object arg = null;
+            if (clz == String.class) { // setter 메서드의 매개변수가 문자열
+                arg = "문자열";
+            } else if (clz == LocalDateTime.class) { // setter 메서드의 매개변수가 LocalDateTime
+                arg = LocalDateTime.now();
+            }
+
+            method.invoke(obj, arg); // setter 메서드 호출
         }
 
+        System.out.println(obj);
     }
 }

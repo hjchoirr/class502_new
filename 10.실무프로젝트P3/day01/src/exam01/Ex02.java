@@ -12,9 +12,11 @@ public class Ex02 {
 
         Field field = clazz.getDeclaredField("str");
         field.setAccessible(true);
-
+        System.out.println("str Field : " + field);
         field.set(obj, "DEF");
-        System.out.println(obj);
+
+        Member member = (Member)obj;
+        System.out.println("member.str : " + member.str);
 
     }
 }
