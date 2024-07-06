@@ -17,6 +17,7 @@ public class InfoService {
 
     @Autowired
     public void setMemberDao(Optional<MemberDao> opt) {
+
         this.memberDao = opt.get();
     }
 

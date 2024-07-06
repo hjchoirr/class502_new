@@ -6,6 +6,7 @@ public class CommonException extends RuntimeException{
     private int status;  //응답코드
 
     public CommonException(String message) {
+
         this(message, HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
 

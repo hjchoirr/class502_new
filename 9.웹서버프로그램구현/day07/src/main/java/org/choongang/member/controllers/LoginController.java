@@ -21,6 +21,7 @@ public class LoginController extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/templates/member/login.jsp");
+        System.out.println("doGet-login");
         rd.forward(req,resp);
     }
 

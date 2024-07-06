@@ -11,6 +11,7 @@ public class JoinValidator implements Validator<RequestJoin>, RequiredValidator,
     private MemberMapper mapper;
 
     public JoinValidator(MemberMapper mapper) {
+
         this.mapper = mapper;
     }
     @Override
