@@ -1,9 +1,9 @@
-package exam01.member.services;
-import exam01.member.dao.MemberDao;
-import exam01.member.entities.Member;
-import lombok.RequiredArgsConstructor;
+package member.services;
+
+
+import member.dao.MemberDao;
+import member.entities.Member;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,28 +13,40 @@ import java.util.Optional;
 
 @Service
 public class InfoService {
+    @Autowired
     private MemberDao memberDao;
-    private DateTimeFormatter formatter;
+
     //private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yy.MM.dd");
+    @Autowired
+    private DateTimeFormatter formatter;
 
     @Autowired
     public void setMemberDao(Optional<MemberDao> opt) {
-
         this.memberDao = opt.get();
     }
-/*
-    @Autowired //@Nullable 쓰면
-    public void setFormatter( DateTimeFormatter formatter) {
+
+    /*
+    @Autowired(required = false) // DateTimeFormatter 빈이 없으면 -> 호출 X
+    public void setFormatter(DateTimeFormatter formatter) {
+        System.out.println("호출!");
         this.formatter = formatter;
     }
-*/
+    */
+
+    @Autowired
+    public void setFormatter(DateTimeFormatter formatter) {
+        //System.out.println("호출!");
+        this.formatter = formatter;
+    }
+
     public void printList() {
         List<Member> members = memberDao.getList();
-        members.forEach(m-> {
+        members.forEach(m -> {
             System.out.println(m);
             LocalDateTime regDt = m.getRegDt();
-            if(formatter != null) {
+            if (formatter != null) {
                 System.out.println(formatter.format(regDt));
+
             }
         });
     }
