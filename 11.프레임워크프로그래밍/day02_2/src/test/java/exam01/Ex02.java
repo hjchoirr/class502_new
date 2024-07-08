@@ -18,6 +18,5 @@ public class Ex02 {
         Calculator cal = (Calculator) obj;
         long result = cal.factorial(10L);
         System.out.println(result);
-        System.out.println(cal);
     }
 }
