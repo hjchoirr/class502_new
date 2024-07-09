@@ -2,6 +2,8 @@ package exam01;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedInputStream;
+
 public class Ex01 {
     @Test
     void test1() {
@@ -25,7 +27,6 @@ public class Ex01 {
         Calculator cal1 = new ProxyCalculator(new ImplCalculator());
         long result1 = cal1.factorial(10L);
         System.out.println("cal1:" + result1);
-
 
         Calculator cal2 = new ProxyCalculator(new RecCalculator());
         long result2 = cal2.factorial(10L);
