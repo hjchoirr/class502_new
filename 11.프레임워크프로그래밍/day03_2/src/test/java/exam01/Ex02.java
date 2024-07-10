@@ -23,17 +23,24 @@ public class Ex02 {
 
     @Test
     void test() {
-        List<Member> members = jdbcTemplate.query("select * from member", new RowMapper<Member>() {
-            @Override
-            public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return null;
-            }
-        });
+        List<Member> members = jdbcTemplate.query("select * from member where seq >= ?", new RowMapper<Member>() {
+                    @Override
+                    public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        Member member = Member.builder()
+                            .seq(rs.getLong("seq"))
+                            .email(rs.getString("email"))
+                            .password(rs.getString("password"))
+                            .userName(rs.getString("user_name"))
+                            .regDt(rs.getTimestamp("reg_dt").toLocalDateTime())
+                            .build();
+                        return member;
+                    }
+                }, 0);
 
-        //List<Member> members = jdbcTemplate.query("select * from member", (rs, num) -> mapper(rs, num));
-        //List<Member> members = jdbcTemplate.query("select * from member", this::mapper);
+                //List<Member> members = jdbcTemplate.query("select * from member", (rs, num) -> mapper(rs, num));
+                //List<Member> members = jdbcTemplate.query("select * from member", this::mapper);
 
-        System.out.println(members);
+                System.out.println(members);
 
     }
 
