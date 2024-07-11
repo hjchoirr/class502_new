@@ -17,10 +17,10 @@ public class AppCtx {
         ds.setPassword("oracle");
 
         ds.setTestWhileIdle(true); //유휴 객체 유효성 체크
-        ds.setInitialSize(2);
-        ds.setMaxActive(10);
-        ds.setTimeBetweenEvictionRunsMillis(10 * 1000); //10초마다 연결 상태 체크
-        ds.setMinEvictableIdleTimeMillis(60 * 1000); //유휴객체 생존시간
+        //ds.setInitialSize(2);
+        //ds.setMaxActive(10);
+        //ds.setTimeBetweenEvictionRunsMillis(10 * 1000); //10초마다 연결 상태 체크
+        //ds.setMinEvictableIdleTimeMillis(60 * 1000); //유휴객체 생존시간
 
         return ds;
     }
