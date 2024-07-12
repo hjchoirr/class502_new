@@ -1,31 +1,70 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<c:url var="actionUrl" value="/member/join" />
-<h1>회원가입</h1>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<form method="post" action="${actionUrl}" autocomplete="off">
+<c:url var="actionUrl" value="/member/join" />
+<spring:message code="LOGIN_MSG" arguments="사용자01,USER01"/>
+<spring:message code="LOGIN_MSG">
+    <spring:argument value="사용자01" />
+    <spring:argument value="User01" />
+</spring:message>
+<h1><spring:message code="회원가입"/></h1>
+
+<form:form method="post" action="${actionUrl}" autocomplete="off" modelAttribute="requestJoin" >
     <dl>
-        <dt>이메일</dt>
-        <dd><input type="text" name="email" ></dd>
+        <dt><spring:message code="이메일"/></dt>
+        <dd><form:input path="email" cssClass="input-txt" /></dd>
     </dl>
     <dl>
-        <dt>비밀번호</dt>
-        <dd><input type="password" name="password"></dd>
+        <dt><spring:message code="비밀번호"/></dt>
+        <dd><form:password path="password" /></dd>
     </dl>
     <dl>
-        <dt>비밀번호 확인</dt>
-        <dd><input type="password" name="cinfirmPassword"></dd>
+        <dt><spring:message code="비밀번호_확인"/></dt>
+        <dd><form:password path="confirmPassword"/></dd>
     </dl>
     <dl>
-        <dt>회원명</dt>
-        <dd><input type="text" name="userName"> </dd>
+        <dt><spring:message code="회원명"/></dt>
+        <dd><form:input path="userName"/> </dd>
+    </dl>
+    <%--
+<dl>
+<dt>취미</dt>
+<dd>
+    <form:radiobuttons path="hobby" items="${hobbies}"/>
+</dd>
+
+<dd>
+    <form:select path="hobby">
+        <option value="">선택하세요</option>
+        <form:options items="${hobbies2}" itemLabel="code" itemValue="value"/>
+    </form:select>
+</dd>
+<dd>
+    <form:select path="hobby">
+        <option value="">선택하세요</option>
+        <form:options items="${hobbies}"/>
+    </form:select>
+</dd>
+    <dd><form:select path="hobby" items="${hobbies}" /></dd>
+    <dd><form:checkboxes path="hobby" items="${hobbies}"/></dd>
+
     </dl>
     <dl>
-        <dt>약관동의</dt>
+        <dt>주소</dt>
         <dd>
-            <input type="checkbox" name="agree" value="true" id="agree">
-            <label for="agree">회원가입 약관에 동의합니다</label>
+            <form:input path="addr.zipCode" placeholder="우편번호"/>
+            <form:input path="addr.address" placeholder="주소"/>
+            <form:input path="addr.addressSub" placeholder="나머지 주소"/>
         </dd>
     </dl>
-    <button type="submit">가입하기</button>
-</form>
+    --%>
+    <dl>
+        <dt><spring:message code="약관동의"/></dt>
+        <dd>
+            <form:checkbox path="agree" value="true" label="회원가입 약관에 동의합니다"/>
+        </dd>
+    </dl>
+    <button type="submit">가입 하기</button>
+</form:form>

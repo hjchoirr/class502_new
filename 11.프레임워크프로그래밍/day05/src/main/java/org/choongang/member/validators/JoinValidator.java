@@ -8,13 +8,26 @@ import org.choongang.global.validators.Validator;
 import org.choongang.member.controllers.RequestJoin;
 import org.choongang.member.mappers.MemberMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
 
 @Component
 @RequiredArgsConstructor
 public class JoinValidator implements Validator<RequestJoin>, RequiredValidator {
+//public class JoinValidator implements Validator {
 
     private final MemberMapper mapper;
+/*
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return clazz.isAssignableFrom(RequestJoin.class); // 검증을 RequestJoin 으로 한정
+    }
 
+    @Override
+    public void validate(Object target, Errors errors) {
+
+    }
+
+ */
     @Override
     public void check(RequestJoin form) {
         /**
@@ -43,4 +56,5 @@ public class JoinValidator implements Validator<RequestJoin>, RequiredValidator 
         checkTrue(password.equals(confirmPassword), new BadRequestException("비밀번호가 일치하지 않습니다."));
 
     }
+
 }
