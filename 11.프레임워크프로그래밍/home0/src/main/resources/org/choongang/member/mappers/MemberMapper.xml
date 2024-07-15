@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.choongang.member.mappers.MemberMapper">
+    <insert id="register">
+        insert into member (seq, email, password, user_name)
+        values (seq_member.nextval, #{email}, #{password}, #{userName})
+    </insert>
+
+    <select id="get" resultMap="memberMap">
+        select seq, email, password, user_name, reg_dt from member where email = #{email}
+    </select>
+
+    <select id="exists" resultType="int">
+        select count(*) from member where email = #{email}
+    </select>
+</mapper>
