@@ -6,18 +6,15 @@ import org.choongang.global.exceptions.BadRequestException;
 import org.choongang.member.controllers.RequestJoin;
 import org.choongang.member.entities.Member;
 import org.choongang.member.mappers.MemberMapper;
-import org.choongang.member.validators.JoinValidator;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 public class JoinService {
-    private final JoinValidator validator;
     private final MemberMapper memberMapper;
 
     public void process(RequestJoin form) {
-        validator.check(form);
 
         String hash = BCrypt.hashpw(form.getPassword(), BCrypt.gensalt(12));
 
