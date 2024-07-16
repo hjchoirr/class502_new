@@ -7,17 +7,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 @Slf4j
 @Controller
-@RequestMapping("/servey")
-@SessionAttributes("requestSurvey")
+@RequestMapping("/survey")
+@SessionAttributes("requestSurvey") // session 에 유지하기 ***
 public class SurveyController {
 
-    @ModelAttribute
-    public RequestSurvey requestServey() {
+    @ModelAttribute // 공통 커맨드 객체  ***
+    public RequestSurvey requestSurvey() {
+
         return new RequestSurvey();
     }
 
     @GetMapping("/step1")
-    public String step1() { // get일때는 @ModelAttribute 명시해야함
+    public String step1(@ModelAttribute RequestSurvey form) { // get일때는 @ModelAttribute 명시해야함 => 공통 커맨드 객체
+
         return "survey/step1";
     }
 
@@ -36,7 +38,7 @@ public class SurveyController {
 
         status.setComplete(); // 세션 비우기 - request
 
-        log.info("status.setComplete() 후");
+        log.info("status.setComplete()");
 
         log.info("form : " + form.toString());
         return "survey/step3";

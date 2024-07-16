@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<c:url var="actionUrl" value="/servey/step2" />
+<c:url var="actionUrl" value="/survey/step2" />
 
 <h1>step1</h1>
 <form:form method="post" autocomplete="off" action="${actionUrl}" modelAttribute="requestSurvey">
