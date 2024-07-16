@@ -15,7 +15,13 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>org.choongang.config.MvcConfig</param-value>
         </init-param>
+        <multipart-config>
+            <max-file-size>20971520</max-file-size><!-- 한개 파일 최대 20M -->
+            <max-request-size>62914560</max-request-size> <!-- 한번에 업로드 파일 용량 -->
+            <file-size-threshold>20971520</file-size-threshold><!-- 메모리 보관 최대 용량 그 이상은 임시 폴더에 보관-->
+        </multipart-config>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>

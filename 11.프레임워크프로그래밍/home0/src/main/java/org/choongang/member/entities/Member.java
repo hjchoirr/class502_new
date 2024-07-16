@@ -10,10 +10,7 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class Member {
-    @Id
     private Long seq;
     private String email;
     private String password;

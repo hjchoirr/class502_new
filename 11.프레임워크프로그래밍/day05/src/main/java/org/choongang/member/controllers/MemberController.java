@@ -1,15 +1,19 @@
 package org.choongang.member.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.choongang.global.exceptions.BadRequestException;
 import org.choongang.member.entities.Member;
 import org.choongang.member.services.JoinService;
 import org.choongang.member.services.LoginService;
 import org.choongang.member.validators.JoinValidator;
 import org.choongang.member.validators.LoginValidator;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +47,8 @@ public class MemberController {
 
     @GetMapping("/login")
     public String login(@ModelAttribute RequestLogin form,
-                        @CookieValue(name="savedEmail", required = false) String savedEmail) {
+                        @CookieValue(name="savedEmail", required = false) String savedEmail
+                        /*@SessionAttribute(name="member", required = false) Member member*/) {
 
         if(savedEmail != null) {
             form.setSaveEmail(true);
@@ -72,6 +77,35 @@ public class MemberController {
         session.invalidate();
         return "redirect:/member/login";
     }
+
+    @GetMapping("/list")
+    public String list(@Valid @ModelAttribute MemberSearch memberSearch, Errors errors) {
+
+        log.info(memberSearch.toString());
+
+        boolean result = false;
+        if(!result) {
+            throw new BadRequestException("예외발생!!");
+        }
+        return "member/list";
+    }
+/*
+    @ExceptionHandler(Exception.class)
+    public String errorHandler(Exception e, Model model, HttpServletRequest request, HttpServletResponse response) {
+
+        e.printStackTrace();
+        log.info("MemberController에서 유입");
+
+        return "error/common";
+    }
+ */
+    @ResponseBody
+    @GetMapping({"/info/{id}/{id2}", "/info/{id}", "/info/", "/info//", "/info///"})
+    public void info(@PathVariable(name="id", required = false) String email, @PathVariable(name="id2", required = false) String email2) {
+        log.info("email : {} email2 : {} ", email, email2);
+    }
+
+
 
 /*
     @InitBinder
