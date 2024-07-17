@@ -1,6 +1,7 @@
 package org.choongang.survey.controllers;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -31,16 +32,24 @@ public class SurveyController {
     }
 
     @PostMapping("/step3")
-    public String step3(RequestSurvey form, SessionStatus status) {
+    public String step3(RequestSurvey form, SessionStatus status, HttpSession session) {
         log.info("step3");
 
-        log.info("form : " + form.toString());
+        log.info("form 1 : " + form.toString());
 
-        status.setComplete(); // 세션 비우기 - request
+        //status.setComplete();
+        form = (RequestSurvey) session.getAttribute("requestSurvey");
+        log.info("form 2 : " + form.toString());
 
-        log.info("status.setComplete()");
+        session.removeAttribute("requestSurvey"); // 세션 비우기 - request
 
-        log.info("form : " + form.toString());
+        form = (RequestSurvey) session.getAttribute("requestSurvey");
+        if (form == null) {
+            log.info("form is null");
+        } else {
+            log.info("form : " + form.toString());
+        }
+
         return "survey/step3";
     }
 }

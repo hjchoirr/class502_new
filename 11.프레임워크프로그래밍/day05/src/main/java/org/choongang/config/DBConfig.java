@@ -1,5 +1,6 @@
 package org.choongang.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -14,7 +15,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.apache.tomcat.jdbc.pool.DataSource;
-
+@Slf4j
 @Configuration
 @EnableTransactionManagement
 @MapperScan("org.choongang")
@@ -22,11 +23,15 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 public class DBConfig extends AbstractJdbcConfiguration {
     @Bean(destroyMethod = "close")
     public DataSource dataSource()  {
+        log.info("---org 프로파일---");
+
         DataSource ds = new DataSource();
         ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
         ds.setUrl("jdbc:oracle:thin:@localhost:1521:XE");
-        ds.setUsername("SPRING");
-        ds.setPassword("oracle");
+        //ds.setUsername("SPRING");
+        //ds.setPassword("oracle");
+        ds.setUsername(System.getenv("db.username"));
+        ds.setPassword(System.getenv("db.password"));
         ds.setInitialSize(2);
         ds.setMaxActive(10);
         ds.setMaxIdle(10);

@@ -17,6 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.IntStream;
+
 @Slf4j
 @Controller
 @RequestMapping("/member")
@@ -105,7 +109,19 @@ public class MemberController {
         log.info("email : {} email2 : {} ", email, email2);
     }
 
-
+    @GetMapping("/list2")
+    @ResponseBody
+    public List<Member> list2() {
+        List<Member> members = IntStream.range(1, 10).mapToObj(i ->
+            Member.builder()
+                .seq((long)i)
+                .userName("사용자" + i)
+                .email("user0" + i)
+                .regDt(LocalDateTime.now())
+                .password("1234")
+                .build()).toList();
+        return members;
+    }
 
 /*
     @InitBinder

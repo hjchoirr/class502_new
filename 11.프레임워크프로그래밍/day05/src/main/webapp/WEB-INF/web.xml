@@ -15,6 +15,12 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>org.choongang.config.MvcConfig</param-value>
         </init-param>
+        <!--
+        <init-param>
+            <param-name>spring.profiles.active</param-name>
+            <param-value>prod</param-value>
+        </init-param>
+        -->
         <multipart-config>
             <max-file-size>20971520</max-file-size><!-- 한개 파일 최대 20M -->
             <max-request-size>62914560</max-request-size> <!-- 한번에 업로드 파일 용량 -->
