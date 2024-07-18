@@ -13,6 +13,9 @@ import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -49,10 +52,11 @@ public class ApiMemberControllerTest {
         om.registerModule(new JavaTimeModule());
 
         RequestJoin form = new RequestJoin();
-        form.setEmail("user102@test.com");
+        //form.setEmail("user104@test.com");
         form.setPassword("12345678");
         form.setConfirmPassword("12345678");
-        form.setUserName("사용자102");
+        form.setUserName("사용자104");
+        form.setRegDt(LocalDateTime.now());
         form.setAgree(true);
 
         String json = om.writeValueAsString(form);
@@ -63,7 +67,6 @@ public class ApiMemberControllerTest {
                 .content(json)  //요청바디
             ).andDo(print())
             .andExpect(status().isCreated());
-
     }
     @Test
     void test2() throws Exception {

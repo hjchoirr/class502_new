@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
-@ControllerAdvice("org.choongang.member")
+//@ControllerAdvice("org.choongang")
 public class CommonControllerAdvice {
 
     @ExceptionHandler(Exception.class)
