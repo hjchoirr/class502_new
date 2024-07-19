@@ -21,8 +21,16 @@ public class Utils {
     private final HttpServletRequest request;
 
     public Map<String, List<String>> getErrorMessages(Errors errors) {
-        // FieldErrors
+        System.out.println("---------------------------");
+        errors.getFieldErrors().forEach(a -> System.out.println("** a.getField()=" + a.getField() + "|a.getCode()=" + a.getCode()
+        + "|a.getRejectedValue()=" + a.getRejectedValue() + "|a.getDefaultMessage()=" + a.getDefaultMessage() + "|a.getClass().getName()=" + a.getClass().getName()
+                + "|--getCodeMessages(a.getCodes()=" + getCodeMessages(a.getCodes())
+        ));
+        System.out.println("---------------------------");
+        errors.getGlobalErrors().forEach(a-> System.out.println("#**# a.getCode()=" + a.getCode() + " a.getDefaultMessage()=" + a.getDefaultMessage()
+        + " a.getObjectName()=" + a.getObjectName() + " getCodeMessages(a.getCodes())=" + getCodeMessages(a.getCodes())));
 
+        // FieldErrors
         Map<String, List<String>> messages = errors.getFieldErrors()
                 .stream()
                 .collect(Collectors.toMap(FieldError::getField, e -> getCodeMessages(e.getCodes())));
@@ -51,7 +59,7 @@ public class Utils {
                         return "";
                     }
                 })
-                .filter(s -> s != null && !s.isBlank())
+                .filter(s -> !s.isBlank())
                 .toList();
 
         ms.setUseCodeAsDefaultMessage(true);

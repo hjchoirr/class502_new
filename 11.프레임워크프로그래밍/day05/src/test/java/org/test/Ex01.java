@@ -74,15 +74,15 @@ public class Ex01 {
     @Test
     void test4() throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
-        RequestJoin form = new RequestJoin();
-        form.setEmail("user02@test.com");
-        form.setPassword("user02@test.com");
-        form.setConfirmPassword(form.getPassword());
-        form.setUserName("사용자02");
-        form.setRegDt(LocalDateTime.now());
-        form.setAgree(true);
+        RequestJoin requestJoin = new RequestJoin();
+        requestJoin.setEmail("user02@test.com");
+        requestJoin.setPassword("user02@test.com");
+        requestJoin.setConfirmPassword(requestJoin.getPassword());
+        requestJoin.setUserName("사용자02");
+        requestJoin.setRegDt(LocalDateTime.now());
+        requestJoin.setAgree(true);
 
-        String params = om.writeValueAsString(form);
+        String params = om.writeValueAsString(requestJoin);
         System.out.println(params);
 
         HttpHeaders headers = new HttpHeaders();
@@ -99,16 +99,16 @@ public class Ex01 {
     @DisplayName("일반 양식 POST : Content-Type: application/x-www-form-urlencoded")
     void test5() {
         RestTemplate restTemplate = new RestTemplate();
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("email", "user03@test.com");
-        params.add("password", "user03@test.com");
-        params.add("confirmPassword", "user03@test.com");
-        params.add("userName", "user03");
-        params.add("regDt", LocalDateTime.now().toString());
-        params.add("agree", "true");
+        MultiValueMap<String, String> joinParams = new LinkedMultiValueMap<>();
+        joinParams.add("email", "user03@test.com");
+        joinParams.add("password", "user03@test.com");
+        joinParams.add("confirmPassword", "user03@test.com");
+        joinParams.add("userName", "user03");
+        joinParams.add("regDt", LocalDateTime.now().toString());
+        joinParams.add("agree", "true");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(params, headers);
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(joinParams, headers);
 
         String url = "http://localhost:3000/day05/member/join";
         ResponseEntity<String> response = restTemplate.postForEntity(url, request, String.class);

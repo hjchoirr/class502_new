@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+</head>
+<body>
+<h1>회원가입</h1>
+<form method="post" autocomplete="off" th:object="${requestJoin}">
+    <dl>
+        <dt th:text="#{이메일}">이메일</dt>
+        <dd>
+            <input type="text" name="email" th:field="*{email}">
+            <div th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+    <dl>
+        <dt>비밀번호</dt>
+        <dd><input type="password" name="password" th:field="*{password}"> </dd>
+        <div th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+    </dl>
+    <dl>
+        <dt>비밀번호확인</dt>
+        <dd>
+            <input type="password" name="confirmPassword" th:field="*{confirmPassword}">
+            <div th:each="err : ${#fields.errors('confirmPassword')}" th:text="${err}"></div>
+        </dd>
+    </dl>
+    <dl>
+        <dt>회원명</dt>
+        <dd><input type="text" name="userNamer" th:field="*{userName}"></dd>
+        <div th:each="err : ${#fields.errors('userName')}" th:text="${err}"></div>
+    </dl>
+    <div>
+        <input type="checkbox" name="agree" id="agree" value="true" th:field="*{agree}">
+        <label for="agree">회원가입 약관에 동의합니다.</label>
+        <div th:each="err : ${#fields.errors('agree')}" th:text="${err}"></div>
+    </div>
+    <button type="submit">가입하기</button>
+</form>
+</body>
+</html>

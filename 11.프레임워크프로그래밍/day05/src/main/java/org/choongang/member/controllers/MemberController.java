@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.Thymeleaf;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -82,6 +83,29 @@ public class MemberController {
         return "redirect:/member/login";
     }
 
+    @GetMapping("list")   // Thymeleaf 테스트용
+    public String list(Model model) {
+        /*
+        Member member = Member.builder().email("user01@test.com")
+                .password("12345678")
+                .userName("<h1>사용자01</h1>")
+                .regDt(LocalDateTime.now())
+                .build();
+        model.addAttribute("member", member);
+         */
+
+        List<Member> items = IntStream.rangeClosed(1, 10).mapToObj(i -> Member.builder()
+                .email("user" + i + "@test.com")
+                .userName("사용자" + i)
+                .regDt(LocalDateTime.now())
+                .build()
+        ).toList();
+
+        model.addAttribute("items",items);
+
+        return "member/list";
+    }
+/*
     @GetMapping("/list")
     public String list(@Valid @ModelAttribute MemberSearch memberSearch, Errors errors) {
 

@@ -32,6 +32,6 @@ public class RestCommonControllerAdvice {
 
         e.printStackTrace();
 
-        return ResponseEntity.status(status).body(data);
+        return ResponseEntity.status(status).body(data);   // 상태 코드도 응답데이터에 넣어주기 위해 ResponseEntity 자료형으로 리턴함
     }
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>순번</th>
+                <th> * </th>
+                <th>이메일</th>
+                <th>회원명</th>
+                <th>가입일시</th>
+            </tr>
+            <tbody>
+                <tr th:each="item, status : ${items}" th:object="${item}" th:classappend="${status.even} ? 'on':''">
+                    <td th:text="${status.count}"></td>
+                    <td>
+                        순번:[[${status.count}]]
+                        / 첫번째 : [[${status.first}]]
+                        / 마지막 : [[${status.last}]] /
+                        <th:block th:switch="${status.even}">
+                            <span th:case="true">짝수</span>
+                            <span th:case="false">홀수</span>
+                        </th:block>
+                        /
+                        <th:block th:if="${status.even}" th:text="짝수"></th:block>
+                        <th:block th:if="${status.odd}">홀수</th:block>
+                        <th:block th:unless="${status.even}"> / 홀수</th:block>
+                    </td>
+                    <td th:text="*{email}"></td>
+                    <td th:text="*{userName}"></td>
+                    <td th:text="*{regDt}"></td>
+                </tr>
+        <!--
+                <tr th:each="item : ${items}" th:object="${item}">
+                    <td th:text="*{email}"></td>
+                    <td th:text="*{userName}"></td>
+                    <td th:text="*{regDt}"></td>
+                </tr>
+        -->
+            </tbody>
+            </thead>
+        </table>
+        <h1 th:if="true">항상노출</h1>
+        <h1 th:if="false">항상 미노출</h1>
+    </body>
+</html>

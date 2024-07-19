@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+        <form method="post" th:action="@{/member/login}" autocomplete="off" th:object="${requestLogin}">
+            <dl>
+                <dt th:text="#{이메일}"></dt>
+                <dd><input type="text" name="email" th:field="*{email}"> </dd>
+                <div th:each="err : ${#fields.errors('email')}" th:text="${err}"></div>
+            </dl>
+            <dl>
+                <dt th:text="#{비밀번호}"></dt>
+                <dd><input type="password" name="password" th:field="*{password}"> </dd>
+                <div th:each="err : ${#fields.errors('password')}" th:text="${err}"></div>
+            </dl>
+            <div>
+                <input type="checkbox" name="saveEmail" id="saveEmail" value="true">
+                <label for="saveEmail"  th:text="#{이메일_기억하기}"> </label>
+            </div>
+            <button type="submit">로그인</button>
+            <div th:each="err : ${#fields.errors('gloabl')}" th:text="${err}"></div>
+
+            <div th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+        </form>
+    </body>
+</html>
