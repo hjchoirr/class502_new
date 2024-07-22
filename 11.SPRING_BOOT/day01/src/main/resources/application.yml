@@ -1,0 +1,18 @@
+server:
+  port: 3000
+spring:
+  application:
+    name: "day01"
+  # 라이브 리로드
+  devtools:
+    livereload:
+      enabled: true
+
+file:
+  upload:
+    path:  # - : 리스트 형태의 값  - file.upload.path
+      - D:/uploads/
+      - D:/uploads2/
+    url: /uploads/   # file.upload/url
+
+

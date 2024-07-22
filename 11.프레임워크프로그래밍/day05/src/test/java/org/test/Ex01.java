@@ -21,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -44,6 +45,7 @@ public class Ex01 {
             //.encode()  // encoding 된 문자열이 존재함을 알려주기
             .build("AAA", "BBB");
         System.out.println(uri);
+
     }
 
     @Test
@@ -70,7 +72,17 @@ public class Ex01 {
         //List<PostData> items = om.readValue(itemsBody, new TypeReference<List<PostData>>(){});
         items.forEach(System.out::println);
     }
+/*
+    @Test
+    void test3() throws JsonProcessingException {
+        RestTemplate restTemplate = new RestTemplate();
+        String postString = restTemplate.getForObject("https://jsonplaceholder.typicode.com/posts", String.class);
 
+        List<PostData> postDatas = om.readValue(postString, new TypeReference<List<PostData>>() {});
+        System.out.println(postDatas);
+
+    }
+*/
     @Test
     void test4() throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();

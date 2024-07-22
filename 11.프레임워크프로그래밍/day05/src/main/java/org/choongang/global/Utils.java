@@ -15,21 +15,15 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class Utils {
+public class Utils { // 빈의 이름 : utils -> 타임리프에서 사용가능
 
     private final MessageSource messageSource;
     private final HttpServletRequest request;
+    public String toUpper(String str) {
+        return str.toUpperCase();
+    }
 
     public Map<String, List<String>> getErrorMessages(Errors errors) {
-        System.out.println("---------------------------");
-        errors.getFieldErrors().forEach(a -> System.out.println("** a.getField()=" + a.getField() + "|a.getCode()=" + a.getCode()
-        + "|a.getRejectedValue()=" + a.getRejectedValue() + "|a.getDefaultMessage()=" + a.getDefaultMessage() + "|a.getClass().getName()=" + a.getClass().getName()
-                + "|--getCodeMessages(a.getCodes()=" + getCodeMessages(a.getCodes())
-        ));
-        System.out.println("---------------------------");
-        errors.getGlobalErrors().forEach(a-> System.out.println("#**# a.getCode()=" + a.getCode() + " a.getDefaultMessage()=" + a.getDefaultMessage()
-        + " a.getObjectName()=" + a.getObjectName() + " getCodeMessages(a.getCodes())=" + getCodeMessages(a.getCodes())));
-
         // FieldErrors
         Map<String, List<String>> messages = errors.getFieldErrors()
                 .stream()

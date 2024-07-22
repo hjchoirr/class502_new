@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-    <body>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/mainLayout}">
+
+    <main layout:fragment="content">
+
         <table border="1">
             <thead>
             <tr>
@@ -26,9 +30,9 @@
                         <th:block th:if="${status.odd}">홀수</th:block>
                         <th:block th:unless="${status.even}"> / 홀수</th:block>
                     </td>
-                    <td th:text="*{email}"></td>
+                    <td th:text="*{#strings.concat(userName, '(', email, ')')}"></td>
                     <td th:text="*{userName}"></td>
-                    <td th:text="*{regDt}"></td>
+                    <td th:text="*{#temporals.format(regDt,'yyyy-MM-dd')}"></td>
                 </tr>
         <!--
                 <tr th:each="item : ${items}" th:object="${item}">
@@ -42,5 +46,12 @@
         </table>
         <h1 th:if="true">항상노출</h1>
         <h1 th:if="false">항상 미노출</h1>
-    </body>
+        <h1 th:text="${#locale}"></h1>
+        <h1 th:text="${#numbers.formatInteger(10000000, 3, 'COMMA')}"></h1>
+        <div th:each="num : ${#numbers.sequence(1,10,2)}">
+            <div th:text="${num}"></div>
+        </div>
+        <h1 th:text="${@utils.toUpper('aaa')}"></h1>
+
+    </main>
 </html>
