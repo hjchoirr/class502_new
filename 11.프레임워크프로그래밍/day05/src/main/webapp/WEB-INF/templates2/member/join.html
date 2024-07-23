@@ -28,7 +28,7 @@
     </dl>
     <dl>
         <dt>회원명</dt>
-        <dd><input type="text" name="userNamer" th:field="*{userName}"></dd>
+        <dd><input type="text" name="userName" th:field="*{userName}"></dd>
         <div th:each="err : ${#fields.errors('userName')}" th:text="${err}"></div>
     </dl>
     <div>

@@ -21,7 +21,7 @@ public class FileController {
     public String upload() {
         return "file/upload";
     }
-
+/*
     @ResponseBody
     @PostMapping("/upload")
     public void uploadPs(@RequestPart("file") MultipartFile file) {
@@ -33,5 +33,18 @@ public class FileController {
         try {
             file.transferTo(uploadPath);
         }catch (IOException e) {}
+    }
+ */
+
+    @PostMapping("/upload")
+    @ResponseBody
+    public void uploadPs(@RequestPart("file") MultipartFile[] files ) {
+        for (MultipartFile file : files) {
+            String fileName = file.getOriginalFilename();
+            File uploadFile = new File(uploadDir + fileName);
+            try {
+                file.transferTo(uploadFile);
+            }catch (IOException e) {}
+        }
     }
 }
