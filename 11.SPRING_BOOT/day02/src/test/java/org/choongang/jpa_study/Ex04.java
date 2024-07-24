@@ -29,15 +29,17 @@ public class Ex04 {
 
         member = em.find(Member.class, member.getSeq());
         System.out.println("member = " + member);
+        System.out.println("createAt: " + member.getCreatedAt() + "modifiedAt: " + member.getModifiedAt());
 
         Thread.sleep(5000);
         member.setUserName("(수정)사용자01");
-        em.persist(member);
 
         em.flush();
         em.clear();
 
         member = em.find(Member.class, member.getSeq());
+        System.out.println("createAt: " + member.getCreatedAt() + "modifiedAt: " + member.getModifiedAt());
+
         System.out.println("member = " + member);
 
     }
