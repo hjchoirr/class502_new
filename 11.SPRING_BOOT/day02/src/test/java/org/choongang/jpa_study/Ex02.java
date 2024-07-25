@@ -5,8 +5,6 @@ import jakarta.persistence.PersistenceContext;
 import org.choongang.member.entities.Member;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,15 +18,13 @@ import java.time.LocalDateTime;
 public class Ex02 {
     @PersistenceContext
     private EntityManager em;
-    @Autowired
-    private SpringDataWebAutoConfiguration springDataWebAutoConfiguration;
 
     @BeforeEach
     void init() {
         for(long i = 1L; i <= 10L; i++) {
 
             Member member = new Member();
-            member.setSeq(i);
+           // member.setSeq(i);
             member.setEmail("user" + i + "@test.com");
             member.setPassword("12345678");
             member.setUserName("사용자" + i);
@@ -37,7 +33,7 @@ public class Ex02 {
 
         }
         em.flush(); // DB insert
-        em.clear(); // PersistenceContext 비우기
+        //em.clear(); // PersistenceContext 비우기
     }
 
 

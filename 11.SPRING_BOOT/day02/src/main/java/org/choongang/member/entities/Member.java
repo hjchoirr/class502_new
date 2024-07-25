@@ -1,12 +1,12 @@
 package org.choongang.member.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.choongang.board.entities.BoardData;
 import org.choongang.global.entities.BaseEntity;
 import org.choongang.member.constants.Authority;
+
+import java.util.List;
 
 @Builder
 @Entity
@@ -40,4 +40,14 @@ public class Member extends BaseEntity {
 
     //@Temporal(TemporalType.DATE) //날짜만
     //private Date date;
+
+
+    @ToString.Exclude // toString 추가를 제외 시킴
+    @OneToMany(mappedBy = "member") // BoardData 엔티티의 @ManyToOne 속성 지정해야함
+    private List<BoardData> items;
+
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="profileSeq")
+    private MemberProfile profile;
+
 }

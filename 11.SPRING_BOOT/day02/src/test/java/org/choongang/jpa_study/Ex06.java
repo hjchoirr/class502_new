@@ -26,12 +26,12 @@ public class Ex06 {
     void init() {
 
         List<Member> members = IntStream.rangeClosed(1, 10)
-                .mapToObj(i -> Member.builder()
-                        .email("user" + i + "@test.com")
-                        .password("123456")
-                        .userName("사용자" + i)
-                        .authority(Authority.USER)
-                        .build()).toList();
+            .mapToObj(i -> Member.builder()
+            .email("user" + i + "@test.com")
+            .password("123456")
+            .userName("사용자" + i)
+            .authority(Authority.USER)
+            .build()).toList();
 
         memberRepository.saveAllAndFlush(members);
     }
@@ -56,7 +56,11 @@ public class Ex06 {
         long total = data.getTotalElements();
         System.out.println("data.getTotalElements() : " + total);
 
+        System.out.println("---data--------------");
+        data.forEach(System.out::println);
+
         List<Member> items = data.getContent(); //
+        System.out.println("---items--------------");
         items.forEach(System.out::println);
     }
 
