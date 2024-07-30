@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 import org.choongang.global.entities.BaseEntity;
 import org.choongang.member.entities.Member;
 
-import java.util.List;
-
 @Data
 @Builder
 @Entity
@@ -19,7 +17,7 @@ public class BoardData extends BaseEntity {
     private Long seq;
 
     @ManyToOne(fetch=FetchType.LAZY) // -> member_seq : 엔티티명_기본키 (memberSeq) 지연로딩
-    @JoinColumn(name="mSeq") // m_seq 로 이름 바꾸기
+    @JoinColumn(name="mSeq") // = m_seq 로 이름 바꾸기
     private Member member;
 
     @Column(nullable = false)
@@ -28,6 +26,6 @@ public class BoardData extends BaseEntity {
     @Lob
     private String content;
 
-    @ManyToMany
-    private List<HashTag> tags;
+    //@ManyToMany
+    //private List<HashTag> tags;
 }

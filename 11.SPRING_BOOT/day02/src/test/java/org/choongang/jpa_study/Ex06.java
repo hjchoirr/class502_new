@@ -54,6 +54,7 @@ public class Ex06 {
 
         Page<Member> data = memberRepository.findByEmailContaining("ser", pageable);
         long total = data.getTotalElements();
+
         System.out.println("data.getTotalElements() : " + total);
 
         System.out.println("---data--------------");

@@ -42,7 +42,7 @@ public class Ex11 {
             .mapToObj(i -> BoardData.builder()
                 .subject("제목" + i)
                 .content("내용" + i)
-                .tags(tags)
+          //      .tags(tags)
                 .build()).toList();
         boardDataRepository.saveAllAndFlush(items);
 
@@ -53,16 +53,16 @@ public class Ex11 {
     void test1() {
         BoardData item = boardDataRepository.findById(1L).orElse(null);
 
-        List<HashTag> tags = item.getTags();
-        tags.forEach(System.out::println);
+        //List<HashTag> tags = item.getTags();
+        //tags.forEach(System.out::println);
     }
 
     @Test
     void test2() {
 
         HashTag tag = hashTagRepository.findById("태그2").orElse(null);
-        List<BoardData> items = tag.getItems();
-        items.forEach(System.out::println);
+        //List<BoardData> items = tag.getItems();
+        //items.forEach(System.out::println);
 
     }
 }

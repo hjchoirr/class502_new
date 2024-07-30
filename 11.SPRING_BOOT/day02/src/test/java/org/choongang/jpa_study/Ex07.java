@@ -39,6 +39,7 @@ public class Ex07 {
     void test1() {
         QMember member = QMember.member;
         BooleanExpression c1 = member.userName.contains("용");
+        System.out.println(c1);
         List<Member> members = (List<Member>)memberRepository.findAll(c1);
         members.forEach(System.out::println);
     }

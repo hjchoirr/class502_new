@@ -43,7 +43,7 @@ public class Member extends BaseEntity {
 
 
     @ToString.Exclude // toString 추가를 제외 시킴
-    @OneToMany(mappedBy = "member") // BoardData 엔티티의 @ManyToOne 속성 지정해야함
+    @OneToMany(mappedBy = "member", cascade = {CascadeType.REMOVE, CascadeType.PERSIST},orphanRemoval = true) // BoardData 엔티티의 @ManyToOne 속성 지정해야함
     private List<BoardData> items;
 
     @OneToOne(fetch=FetchType.LAZY)

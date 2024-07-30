@@ -67,6 +67,7 @@ public class Ex05 {
         Member member3 = memberRepository.findById(1L).orElse(null);
         System.out.println(member3);
 
+
         if(member3 != null ) {
             memberRepository.delete(member3);
             memberRepository.flush();

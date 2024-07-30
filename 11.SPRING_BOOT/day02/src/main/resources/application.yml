@@ -14,6 +14,7 @@ spring:
         show_sql: true # 실행 sql 보여주기
         format_sql: true # sql 들여쓰기, 줄개행
         use_sql_comments: true
+        default_batch_fetch_size: 100
         #dialect: org.hibernate.dialect.OracleDialect # 예전 버전은 꼭 명시 해야..
     hibernate:
       ddlAuto: create
