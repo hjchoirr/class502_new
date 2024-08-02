@@ -1,0 +1,45 @@
+server:
+  port: 3000
+
+spring:
+  cloud:
+    gateway:
+      discovery.locator:
+        enabled: true
+        lowerCaseServiceId: true
+
+      routes:
+        - id: api-service
+          uri: lb://api-service
+          predicates:
+            - Path=/api/v1/**
+          filters:
+            - RewritePath=/api/v1/?(?<path>.*),/$\{path}
+
+        - id: admin-service
+          uri: lb://admin-service
+          predicates:
+            - Path=/admin/**
+          filters:
+            - RewritePath=/admin/?(?<path>.*),/$\{path}
+
+# 유레카 설정
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: ${eurekaHost}/eureka/
+
+#액추에이터 설정
+management:
+  endpoint:
+    gateway:
+      enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: gateway

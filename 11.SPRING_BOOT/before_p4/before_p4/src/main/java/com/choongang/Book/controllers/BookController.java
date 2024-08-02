@@ -14,6 +14,8 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,6 +26,13 @@ public class BookController {
     private final BookService bookService;
     private final RegBookValidator regBookValidator;
 
+    @ModelAttribute("authors")
+    public Map<String, Author> authors() {
+        Map<String, Author> authors = authorRepository.findAll().stream()
+                .collect(Collectors.toMap(a -> a.getAuthorCd(), a -> a));
+        System.out.println(authors);
+        return authors;
+    }
 
     @GetMapping({"/regbook", "/regbook/{seq}"})
     public String regbook(@ModelAttribute RequestBook form, @PathVariable(name="seq", required = false) String seq, Model model) {
@@ -59,8 +68,8 @@ public class BookController {
             System.out.println("regbook - errors.hasErrors() = " + errors.hasErrors());
             return "front/book/regbook";
         }
-        bookService.addBook(form);
-        return "front/book/regbook";
+        bookService.saveBook(form);
+        return "redirect:/book/list";
     }
 
     @GetMapping("/list")
@@ -75,7 +84,9 @@ public class BookController {
     @GetMapping("/delete/{seq}")
     public String delete(@PathVariable(name="seq") String seq, Model model) {
         System.out.println("delete: " + seq);
-        return "front/book/list";
+
+        bookService.deleteBookById(Long.parseLong(seq));
+        return list(model);
     }
 
 

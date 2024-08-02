@@ -5,7 +5,7 @@
 
     <main layout:fragment="content">
         <h1 th:text="#{도서등록}"></h1>
-        [[${requestBook}]]
+        <!--[[${requestBook}]]-->
         <form name="frmRegist" method="post" th:action="@{/book/regbook}" autocomplete="off" th:object="${requestBook}">
             <dl>
                 <dt th:text="#{책제목}"></dt>
@@ -19,6 +19,7 @@
                 <dt th:text="#{작가코드}"></dt>
                 <dd>
                     <input type="text" name="authorCd" th:field="*{authorCd}">
+                    <th:block th:text="${authors[requestBook.authorCd].authorName}"</th:block>
                     <div th:each="err : ${#fields.errors('authorCd')}" th:text="${err}"></div>
                 </dd>
             </dl>
@@ -45,9 +46,11 @@
                 </dd>
             </dl>
             <div>
-            <button type="submit" th:text="#{도서등록}"></button><br>
+            <button type="submit"  th:if="*{seq == null}" th:text="#{도서등록}"></button><br>
+            <button type="submit"  th:if="*{seq != null}" th:text="#{도서수정}"></button><br>
             <a th:href="@{/book/list}" th:text="#{도서목록}"></a>
             </div>
+            <input type="hidden" name="seq" th:field="*{seq}">
         </form>
     </main>
 

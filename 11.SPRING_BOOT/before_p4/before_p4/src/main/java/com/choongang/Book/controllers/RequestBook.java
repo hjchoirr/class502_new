@@ -1,5 +1,6 @@
 package com.choongang.Book.controllers;
 
+import com.choongang.Book.entities.Author;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

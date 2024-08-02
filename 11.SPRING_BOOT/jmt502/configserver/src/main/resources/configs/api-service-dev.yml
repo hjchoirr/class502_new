@@ -1,0 +1,14 @@
+file:
+  upload:
+    path: ${fileUpload.path}
+    url: /upload/
+
+
+  devtools:  # 타입리프쓸때
+    livereload:
+      enabled: true
+
+  web:   # 타입리프쓸때
+    resources:
+      staticLocations: file:src/main/resources/static/
+

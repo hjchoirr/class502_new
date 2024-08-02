@@ -27,11 +27,7 @@ public class RegBookValidator implements Validator {
 
         RequestBook form = (RequestBook) target;
         String authorCd = form.getAuthorCd();
-        String title = form.getTitle();
-        String publisher = form.getPublisher();
         String pubYear = form.getPubYear();
-        int pubYearInt ;
-        String content = form.getContent();
 
         // 작가 코드 있는지..
         Author author = authorRepository.findById(authorCd).orElse(null);
@@ -41,10 +37,10 @@ public class RegBookValidator implements Validator {
 
         // pubYear 출판년도 체크
         try {
-            pubYearInt = Integer.parseInt(pubYear);
+            Integer.parseInt(pubYear);
 
         }catch(NumberFormatException e) {
-            errors.rejectValue("pubYear", "Invalid.pubYear");
+            errors.rejectValue("pubYear", "Invalid");
         }
 
     }
