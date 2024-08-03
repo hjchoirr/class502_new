@@ -12,3 +12,6 @@ file:
     resources:
       staticLocations: file:src/main/resources/static/
 
+cors:
+  allow:
+    origins: '*'

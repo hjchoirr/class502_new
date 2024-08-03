@@ -1,18 +1,47 @@
 package com.jmt502.api.global.configs;
 
+import com.jmt502.api.member.jwt.JwtFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.filter.CorsFilter;
 
 @Configuration
+@RequiredArgsConstructor
+@EnableWebSecurity
+@EnableMethodSecurity  //메서드 종류별로 접근 통제 가능함
 public class SecurityConfig {
+
+    private final CorsFilter corsFilter;
+    private final JwtFilter jwtFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(c-> c.disable());
+        http.csrf(c -> c.disable())
+                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .exceptionHandling(h -> {
+                    h.authenticationEntryPoint((req, res, e) -> res.sendError(HttpStatus.UNAUTHORIZED.value()));
+                    h.accessDeniedHandler((req, res, e) -> res.sendError(HttpStatus.UNAUTHORIZED.value()));
+                })
+                .authorizeHttpRequests(c -> {
+                    c.requestMatchers(
+                        "/account",
+                        "/account/token"
+                    ).permitAll() // 회원가입, 로그인(토큰)은 모든 접근 가능
+                    .anyRequest().authenticated(); // 그외에는 인증 필요
+                });
+
         return http.build();
     }
 

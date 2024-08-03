@@ -54,3 +54,7 @@ management:
 jwt:
   secret: ${jwtSecret}
   validSeconds: ${jwtValidSeconds}
+
+cors:
+  allow:
+    origins: http://jeommechu.xyz

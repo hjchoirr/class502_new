@@ -1,6 +1,9 @@
 package com.jmt502.api.member.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jmt502.api.global.rests.JSONData;
+import com.jmt502.api.member.services.MemberSaveService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -25,11 +29,30 @@ public class MemberControllerTest {
     @Autowired
     private ObjectMapper om;
 
+    @Autowired
+    private MemberSaveService saveService;
+
+    private RequestJoin form;
+
+    @BeforeEach
+    void init() {
+        form = new RequestJoin();
+        form.setEmail("user01@test.com");
+        form.setPassword("_aA123456");
+        form.setConfirmPassword("_aA123456");
+        form.setMobile("010-000-1111");
+        form.setUserName("사용자01");
+        form.setAgree(true);
+
+        saveService.save(form);
+
+    }
+
     @Test
     @DisplayName("회원가입테스트")
     void joinTest() throws Exception{
         RequestJoin form = new RequestJoin();
-        //form.setEmail("user01@test.com");
+        form.setEmail("user01@test.com");
         form.setPassword("_aA123456");
         form.setConfirmPassword("_aA123456");
         form.setUserName("사용자01");
@@ -42,5 +65,41 @@ public class MemberControllerTest {
                 .characterEncoding(Charset.forName("UTF-8"))
                 .content(params))
                 .andDo(print());
+    }
+
+    @Test
+    @DisplayName("token 발급 테스트")
+    void tokenTest() throws Exception{
+        RequestLogin loginForm = new RequestLogin();
+        loginForm.setEmail(form.getEmail());
+        loginForm.setPassword(form.getPassword()+"**");
+
+        String params = om.writeValueAsString(loginForm);
+
+        mockMvc.perform(post("/account/token")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(params))
+                .andDo(print());
+
+    }
+
+    @Test
+    @DisplayName("token 으로 로그인 테스트")
+    void tokenTest1() throws Exception{
+        RequestLogin loginForm = new RequestLogin();
+        loginForm.setEmail(form.getEmail());
+        loginForm.setPassword(form.getPassword());
+
+        String params = om.writeValueAsString(loginForm);
+
+        String body = mockMvc.perform(post("/account/token")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andReturn().getResponse()
+                .getContentAsString(StandardCharsets.UTF_8);
+        JSONData data = om.readValue(body, JSONData.class);
+        String token = (String) data.getData();
+        System.out.println("token: " + token);
+
     }
 }
