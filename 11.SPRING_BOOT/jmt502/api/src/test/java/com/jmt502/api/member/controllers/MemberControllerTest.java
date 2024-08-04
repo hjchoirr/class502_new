@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -68,16 +69,17 @@ public class MemberControllerTest {
     }
 
     @Test
-    @DisplayName("token 발급 테스트")
+    @DisplayName("회원 가입 테스트")
     void tokenTest() throws Exception{
         RequestLogin loginForm = new RequestLogin();
         loginForm.setEmail(form.getEmail());
-        loginForm.setPassword(form.getPassword()+"**");
+        loginForm.setPassword(form.getPassword());
 
         String params = om.writeValueAsString(loginForm);
 
         mockMvc.perform(post("/account/token")
                         .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding(Charset.forName("UTF-8"))
                         .content(params))
                 .andDo(print());
 
@@ -92,14 +94,22 @@ public class MemberControllerTest {
 
         String params = om.writeValueAsString(loginForm);
 
-        String body = mockMvc.perform(post("/account/token")
-                        .contentType(MediaType.APPLICATION_JSON))
+            String body = mockMvc.perform(post("/account/token")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(params)
+                )
                 .andDo(print())
                 .andReturn().getResponse()
                 .getContentAsString(StandardCharsets.UTF_8);
+
         JSONData data = om.readValue(body, JSONData.class);
-        String token = (String) data.getData();
-        System.out.println("token: " + token);
+        String token = (String)data.getData();
+
+        mockMvc.perform(get("/account/test1")
+                        .header("Authorization", "Bearer " + token))
+                .andDo(print());
 
     }
+
 }
+
