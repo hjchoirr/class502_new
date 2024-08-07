@@ -57,4 +57,4 @@ jwt:
 
 cors:
   allow:
-    origins: http://jeommechu.xyz
+    origins: http://localhost:4000

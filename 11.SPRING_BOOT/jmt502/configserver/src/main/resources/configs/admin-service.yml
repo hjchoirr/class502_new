@@ -1,5 +1,12 @@
 server:
   port: 3002
+  servlet:
+    cookie:
+      name: SESSIONID
+  data:
+    redis:
+      host: ${redis.host}
+      port: ${redis.port}
 
 spring:
   datasource:
@@ -8,6 +15,10 @@ spring:
     username: ${db.username}
     password: ${db.password}
 
+  session:
+    store-type: redis
+    redis:
+      namespace: spring:session
   # JPA 설정
   jpa:
     properties:

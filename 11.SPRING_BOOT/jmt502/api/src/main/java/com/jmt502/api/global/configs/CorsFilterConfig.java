@@ -10,7 +10,7 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class CorsFilterConfig {
 
-    @Value("${cors.allow.origins")
+    @Value("${cors.allow.origins}")
     private String  allowedOrigins;
 
     //Core 관련 헤더 - 응답 헤더에 추가
@@ -18,11 +18,17 @@ public class CorsFilterConfig {
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
 
-        config.addAllowedMethod("*"); // 모든 요청 매서드 허용
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedMethod("*"); // 모든 요청 메서드 허용
         config.addAllowedHeader("*"); // 모든 요청 헤더 허용
-        config.addAllowedOrigin("allowedOrigins");
+        if (!allowedOrigins.equals("*")) {
+            config.setAllowCredentials(true);
+        }
+        config.addAllowedOrigin(allowedOrigins);
+        config.addExposedHeader("*");
+
+        source.registerCorsConfiguration("/**", config);
 
         return new CorsFilter(source);
     }
