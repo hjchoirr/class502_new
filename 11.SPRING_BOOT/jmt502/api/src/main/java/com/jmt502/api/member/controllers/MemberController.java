@@ -3,6 +3,8 @@ package com.jmt502.api.member.controllers;
 import com.jmt502.api.global.Utils;
 import com.jmt502.api.global.exceptions.BadRequestException;
 import com.jmt502.api.global.rests.JSONData;
+import com.jmt502.api.member.MemberInfo;
+import com.jmt502.api.member.entities.Member;
 import com.jmt502.api.member.jwt.TokenProvider;
 import com.jmt502.api.member.services.MemberSaveService;
 import com.jmt502.api.member.validators.JoinValidator;
@@ -12,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +28,13 @@ public class MemberController {
     private final Utils utils;
     private final MemberSaveService saveService;
     private final TokenProvider tokenProvider;
+
+    @GetMapping  //로그인한 회원 정보 조회
+    public JSONData info(@AuthenticationPrincipal MemberInfo memberInfo) {
+        Member member = memberInfo.getMember();
+        System.out.println(memberInfo.getAuthorities());
+        return new JSONData(member);
+    }
 
     @PostMapping
     public ResponseEntity join(@RequestBody @Valid RequestJoin form, Errors errors) {
@@ -50,6 +60,9 @@ public class MemberController {
         return new JSONData(token);
 
     }
+
+
+
     @GetMapping("test1")
     public void memberOnly() {
         log.info("회원전용!!");

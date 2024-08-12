@@ -1,5 +1,6 @@
 package com.jmt502.api.member.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jmt502.api.member.constants.Authority;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Authorities {
     @Id
+    @JsonIgnore
     @ManyToOne(fetch= FetchType.LAZY)
     private Member member;
 

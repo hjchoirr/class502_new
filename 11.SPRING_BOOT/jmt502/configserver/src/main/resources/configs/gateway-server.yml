@@ -36,6 +36,14 @@ spring:
           filters:
             - RewritePath=/admin/?(?<path>.*),/$\{path}
 
+        - id: ai-service
+          uri: lb://ai-service
+          predicates:
+            - Path=/api/ai/**
+          filters:
+            - RewritePath=/api/ai/?(?<path>.*),/$\{path}
+
+
 # 유레카 설정
 eureka:
   instance:
