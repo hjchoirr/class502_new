@@ -1,15 +1,14 @@
 {
-  "name": "exam001",
+  "name": "exam01",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "set PORT=3001 & next dev",
+    "dev": "set PORT=3500 & next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "immer": "^10.1.1",
     "next": "14.2.7",
     "react": "^18",
     "react-dom": "^18",
