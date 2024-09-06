@@ -1,4 +1,5 @@
 'use client';
+import React, { useState } from 'react';
 import TodoForm from '../components/TodoForm';
 import TodoList from '../components/TodoList';
 
@@ -11,10 +12,12 @@ const TodoContainer = () => {
 
   const [items, setItems] = useState(items0);
 
-  //const onToggleS = 'onTogle';
   const onToggle = (id) => {
-    console.log('onToggle called!! ', id);
+    const newItem2 = items.map((item) =>
+      item.id == id ? { ...item, done: !item.done } : item,
+    );
 
+    setItems(newItem2);
   };
 
   return (

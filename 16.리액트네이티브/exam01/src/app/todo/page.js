@@ -1,9 +1,9 @@
 export const metadata = {
-    title: "ToDO 할일 관리",
+  title: 'ToDO 할일 관리',
 };
-import TodoContainer from './containers/TodoContainer'
+import TodoContainer from './containers/TodoContainer';
 
 const TodoPage = () => {
-    return <TodoContainer />
+  return <TodoContainer />;
 };
 export default TodoPage;
