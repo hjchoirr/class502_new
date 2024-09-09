@@ -5,7 +5,7 @@ import ContextEx4 from './ContextEx4';
 
 const Context3 = () => {
   let value = useContext(ColorContext);
-  value = {color: 'pink'};
+  //value = {color: 'pink'};
 
   return (
     <>
