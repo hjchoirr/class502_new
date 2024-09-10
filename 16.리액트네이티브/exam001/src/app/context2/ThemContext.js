@@ -1,12 +1,7 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
+const ThemContext = createContext({ color: 'red' });
 
-const ThemContext = () => {
-    ThemContext = createContext('light');
-};
+const AuthContext = createContext('bbb');
 
-const AuthContext = () => {
-    AuthContext = createContext(null);
-};
-
-export {ThemContext, AuthContext};
+export { ThemContext, AuthContext };
