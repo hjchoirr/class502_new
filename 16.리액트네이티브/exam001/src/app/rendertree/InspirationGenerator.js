@@ -1,5 +1,5 @@
 import React from 'react';
-import inspirations from './inspirations';
+import inspirations from './Inspirations';
 import FancyText from './FancyText';
 import Color from './Color';
 

@@ -1,13 +1,11 @@
-
 'use client';
-import Toolbar from "./Toolbar";
+import Toolbar from './Toolbar';
 
 const ButtonPage = () => {
+  const m = 'Play Movie!!';
+  const u = 'Upload Image';
   return (
-    <Toolbar
-      onPlayMovie={()=> alert("Play Movie!!")}
-      onUploadImage={()=>alert("Upload Image")}
-    />
+    <Toolbar onPlayMovie={() => alert(m)} onUploadImage={() => alert(u)} />
   );
 };
 export default ButtonPage;
