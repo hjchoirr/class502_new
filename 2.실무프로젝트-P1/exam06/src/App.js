@@ -11,5 +11,20 @@ export default function LightSwitch() {
     }
   }
 
-  return <Button1 onClick={handleClick}>Toggle the lights</Button1>;
+  return (
+    <>
+      <div>
+        <Button1 onClick={handleClick}>Toggle the lights</Button1>
+      </div>
+      <form onSubmit={(e) => {
+          e.preventDefault();
+          alert('Submitting!!')
+        }}>
+        <input></input>
+        <button>Send</button>
+      </form>
+
+      
+    </>
+  );
 }
