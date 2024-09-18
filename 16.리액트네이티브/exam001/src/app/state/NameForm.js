@@ -1,47 +1,55 @@
 'use client';
 import { useState } from 'react';
 
-export default function Form() {
-  const [person, setPerson] = useState({
-    firstName: 'Barbara',
-    lastName: 'Hepworth',
-    email: 'bhepworth@sculpture.com',
+export default function NameForm() {
+  const [player, setPlayer] = useState({
+    firstName: 'Ranjani',
+    lastName: 'Shettar',
+    score: 10,
   });
+
+  function handlePlusClick() {
+    player.score ++
+    /*
+    setPlayer ({
+      ...player,
+      score: player.score + 1,
+    });
+    */
+  }
   function handleFirstNameChange(e) {
-    setPerson({
-        ...person,
-        firstName: e.target.value,
+    setPlayer({
+    ...player,
+    firstName: e.target.value,
     });
   }
   function handleLastNameChange(e) {
-    setPerson({
-        ...person,
-        lastName: e.target.value,
-    });
-  }
-  function handleEmailChange(e) {
-    setPerson({
-        ...person,
-        email: e.target.value,
+    setPlayer({
+    lastName: e.target.value
     });
   }
   return (
     <>
       <label>
+        name: <b>{player.firstName} {player.lastName} </b>
+        Score: <b>{player.score}</b>
+        {' '}
+        <button onClick={handlePlusClick}>+1</button>
+      </label>
+      <label>
         First name:
-        <input value={person.firstName} onChange={handleFirstNameChange} />
+        <input
+          value={player.firstName}
+          onChange={handleFirstNameChange}
+        />
       </label>
       <label>
         Last name:
-        <input value={person.lastName} onChange={handleLastNameChange} />
+        <input
+          value={player.lastName}
+          onChange={handleLastNameChange}
+        />
       </label>
-      <label>
-        Email:
-        <input value={person.email} onChange={handleEmailChange} />
-      </label>
-      <p>
-        {person.firstName}{' '}{person.lastName}{' '}({person.email})
-      </p>
     </>
-  );
+  ); 
 }
